@@ -18,7 +18,8 @@ private:
 	char *filePath;
 	Record *current;
 	Page page;
-	off_t pid;	// int value of number of pages
+	off_t poff;	// int value of number of completed pages
+	off_t roff;	// reading page value
 	bool pDirty; // true on page changes else false
 
 public:
