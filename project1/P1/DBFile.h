@@ -21,6 +21,7 @@ private:
 	off_t poff;	// int value of number of completed pages
 	off_t roff;	// reading page value
 	bool pDirty; // true on page changes else false
+	bool end;	// true on file end else false
 
 public:
 	DBFile (); 
