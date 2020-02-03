@@ -14,14 +14,18 @@ using namespace std;
 
 DBFile::DBFile()
 {
+    current = new Record();
+}
+
+DBFile::~DBFile()
+{
+    delete current;
 }
 
 int DBFile::Create(const char *f_path, fType f_type, void *startup)
 {
     file.Open(0, (char *)f_path);
     this->filePath = (char *)f_path;
-    // cout << file.GetLength() << " file's length" << endl;
-    current = new Record();
     poff = 0;
     roff = 0;
     pDirty = false;
@@ -68,7 +72,6 @@ void DBFile::MoveFirst()
 
 int DBFile::Close()
 {
-    delete current;
     return file.Close();
 }
 

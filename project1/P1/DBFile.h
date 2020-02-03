@@ -24,7 +24,8 @@ private:
 	bool end;	// true on file end else false
 
 public:
-	DBFile (); 
+	DBFile ();
+	~DBFile ();
 
 	int Create (const char *fpath, fType file_type, void *startup);
 	int Open (const char *fpath);
