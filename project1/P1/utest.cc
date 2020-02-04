@@ -31,7 +31,13 @@ d.Open("temp.bin");
 ASSERT_EQ(d.Close(), 0);
 }
 
-
+TEST(DBFile, FileCreationEmpty) {
+    DBFile d;
+    Record rec;
+    d.Create("temp.bin", heap, NULL);
+    ASSERT_EQ(d.GetNext(rec),0);
+    d.Close();
+}
 
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
