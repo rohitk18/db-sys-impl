@@ -31,6 +31,8 @@ int main () {
 	myComparison.Print ();
 
 	// now open up the text file and start procesing it
+	// /home/shubham/Desktop/DBIProject1/git/tpch-dbgen/lineitem.tbl
+	// /cise/tmp/dbi_sp11/DATA/10M/lineitem.tbl
         FILE *tableFile = fopen ("/cise/tmp/dbi_sp11/DATA/10M/lineitem.tbl", "r");
 
         Record temp;
