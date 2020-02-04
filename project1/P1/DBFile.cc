@@ -22,8 +22,14 @@ DBFile::~DBFile()
     delete current;
 }
 
+/*
+    Creates a new empty binary database file
+*/
 int DBFile::Create(const char *f_path, fType f_type, void *startup)
 {
+    if (f_path == NULL)
+        return 0;
+    cout << "Creating new binary heap file..." << endl;
     file.Open(0, (char *)f_path);
     this->filePath = (char *)f_path;
     poff = 0;
@@ -33,35 +39,44 @@ int DBFile::Create(const char *f_path, fType f_type, void *startup)
     return 1;
 }
 
+/*
+    Loads all the records from table files to respective binary database files
+*/
 void DBFile::Load(Schema &f_schema, const char *loadpath)
 {
+    cout << "Loading all the records from tbl file..." << endl;
     FILE *tblFile = fopen(loadpath, "r");
     Record record;
     while (record.SuckNextRecord(&f_schema, tblFile) != 0)
     {
         Add(record);
     }
-    cout << file.GetLength() << " line 48" << endl;
     fclose(tblFile);
     if (pDirty)
     {
-        cout << poff << " line 52" << endl;
         file.AddPage(&page, poff++);
-        cout << file.GetLength() << " file's length" << endl;
         page.EmptyItOut();
         end = true;
         pDirty = false;
     }
+    cout << "All records loaded." << endl;
 }
 
+/*
+    Opens the already existing database binary files
+*/
 int DBFile::Open(const char *f_path)
 {
+    if(f_path==NULL)
+        return 0;
+    cout << "Opening file." << endl;
     file.Open(1, (char *)f_path);
-    current = new Record();
-
     return 1;
 }
 
+/*
+    Brings the current pointer to start of binary file and first page of file is loaded
+*/
 void DBFile::MoveFirst()
 {
     file.GetPage(&page, 0);
@@ -70,11 +85,18 @@ void DBFile::MoveFirst()
     page.GetFirst(current);
 }
 
+/*
+    Closes the opened binary files
+*/
 int DBFile::Close()
 {
+    cout << "Closing file." << endl;
     return file.Close();
 }
 
+/*
+    Adds(appends) one record to the binary file
+*/
 void DBFile::Add(Record &rec)
 {
     if (&rec == NULL)
@@ -84,12 +106,14 @@ void DBFile::Add(Record &rec)
     if (page.Append(&rec) == 0)
     {
         file.AddPage(&page, poff++);
-        // cout << file.GetLength() << " file's length" << endl;
         page.EmptyItOut();
         page.Append(&rec);
     }
 }
 
+/*
+    Fetches the next record in the page
+*/
 int DBFile::GetNext(Record &fetchme)
 {
     if (!end)
@@ -110,6 +134,9 @@ int DBFile::GetNext(Record &fetchme)
     return 0;
 }
 
+/*
+    Fetches the next record which statisfies the inputted CNF statement 
+*/
 int DBFile::GetNext(Record &fetchme, CNF &cnf, Record &literal)
 {
     ComparisonEngine comp;
