@@ -1,4 +1,14 @@
 .vscode
 
+# project1
 project1/DATA
 project1/DB
+project1/P1/*.o
+project1/P1/*.out
+project1/P1/y.tab.c
+project1/P1/lex.yy.c
+project1/P1/y.tab.h
+project1/P1/main
+project1/P1/gtest
+project1/P1/*.bin
+project1/P1/.idea
