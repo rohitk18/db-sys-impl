@@ -14,3 +14,9 @@ project1/P1/*.bin
 project1/P1/.idea
 
 # project2a
+project2a/a2test/*.o
+project2a/a2test/*.out
+project2a/a2test/y.tab.c
+project2a/a2test/lex.yy.c
+project2a/a2test/y.tab.h
+project2a/a2test/test.h
