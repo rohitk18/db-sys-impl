@@ -1,0 +1,97 @@
+TC1
+-> WriteOut: 
+   * Output to 0x7f080521c760
+   * Output pipe: 2
+   * Input pipe: 1
+   -> Project: 0
+      * Output pipe: 1
+      * Input pipe: 0
+      -> Select from nation: 
+         * Output pipe: 0
+***************************************************************************************************************************
+TC2
+-> WriteOut: 
+   * Output to 0x7f58d421c760
+   * Output pipe: 4
+   * Input pipe: 3
+   -> Project: 0
+      * Output pipe: 3
+      * Input pipe: 2
+      -> Join: ( Att 2 from left record = Att 4 from left record (Int)) 
+         * Estimate = 8, Cost = 8
+         * Output pipe: 2
+         * Input pipe: 1, 0
+         -> Select from nation: 
+            * Output pipe: 1
+         -> Select from region: 
+            * Output pipe: 0
+***************************************************************************************************************************
+TC3
+-> WriteOut: 
+   * Output to 0x7f86b6c1c760
+   * Output pipe: 4
+   * Input pipe: 3
+   -> Sum:       * Function:       * Output pipe: 3
+      * Input pipe: 2
+      -> Join: ( Att 2 from left record = Att 4 from left record (Int)) 
+         * Estimate = 1, Cost = 1
+         * Output pipe: 2
+         * Input pipe: 1, 0
+         -> Select from nation: 
+            * Output pipe: 1
+         -> Select from region: 
+            * Output pipe: 0
+***************************************************************************************************************************
+TC4
+-> WriteOut: 
+   * Output to 0x7f736861c760
+   * Output pipe: 4
+   * Input pipe: 3
+   -> Group by: 
+      * OrderMaker: NumAtts =     1
+  0: -1020542560 Int
+      * Function: 
+         2 PushInt
+      * Output pipe: 3
+      * Input pipe: 2
+      -> Join: ( Att 2 from left record = Att 4 from left record (Int)) 
+         * Estimate = 1, Cost = 1
+         * Output pipe: 2
+         * Input pipe: 1, 0
+         -> Select from nation: 
+            * Output pipe: 1
+         -> Select from region: 
+            * Output pipe: 0
+***************************************************************************************************************************
+TC5
+-> WriteOut: 
+   * Output to 0x7fd7c7a1c760
+   * Output pipe: 7
+   * Input pipe: 6
+   -> Group by: 
+      * OrderMaker: NumAtts =     1
+  0: -941580624 Int
+      * Function: 
+         0 PushInt
+         4 PushInt
+         0 IntPlus
+      * Output pipe: 6
+      * Input pipe: 5
+      -> RemoveDuplication: 
+         * Output pipe: 5
+         * Input pipe: 4
+         -> Join: ( Att 0 from left record = Att 10 from left record (Int)) 
+            * Estimate = 48000, Cost = 48008
+            * Output pipe: 4
+            * Input pipe: 3, 0
+            -> Join: ( Att 2 from left record = Att 4 from left record (Int)) 
+               * Estimate = 8, Cost = 8
+               * Output pipe: 3
+               * Input pipe: 2, 1
+               -> Select from nation: 
+                  * Output pipe: 2
+               -> Select from region: 
+                  * Output pipe: 1
+            -> Select from customer: 
+               * Output pipe: 0
+***************************************************************************************************************************
